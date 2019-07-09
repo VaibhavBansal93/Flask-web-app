@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <!-- Code Block for working on data recieved from server-->
+    {% for post in posts %}
+        <h1>{{ post.title}}</h1>
+        <h2>{{post.author}} on {{ post.date_updated}}</h2>
+        <p>{{post.content}}</p>
+    {% endfor %}
+{% endblock content %}
