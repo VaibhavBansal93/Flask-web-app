@@ -1,4 +1,4 @@
-from flask import Flask , render_template, url_for
+from flask import Flask , render_template, url_for, flash , redirect
 from forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
@@ -38,13 +38,13 @@ def about():
 
 @app.route("/register")
 def register():
-    form = 'RegistrationForm()' #instance of the form that will be sent to the application
-    return render_template('register.html',title='Register',form=form)
+    form = RegistrationForm() #instance of the form that will be sent to the application
+    return render_template('register.html',title='Register',form = form)
 
 @app.route("/login")
 def login():
     form = 'LoginForm()' #instance of the login form to be sent to the application
-    return render_template('login.html',title='Login',form=form)
+    return render_template('login.html',title='Login',form = form)
 
 #runs the code
 app.run(debug=True)
