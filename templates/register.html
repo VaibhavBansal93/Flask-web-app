@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class = "form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>  <!-- mb-4 margin bottom with a value of -->
+                <div class="form-group">
+                    <!-- .Label prints the form label
+                     passing a form-control-label class in it is a bootstrap stuff
+                    that shows the form label only -->
+                    {{ form.username.Label(class="from-control-label")}}
+                    <!-- We also need to display the form data so we again use the 
+                    form.username but this time it will show the form content  
+                    form-control and form-control-lg (for large) (bootsrap classes)-->
+                    {{ form.username(class="from-control form-control-lg")}}
+                </div>
+                <div class="form-group">
+                        {{ form.email.Label(class="from-control-label")}}
+                        {{ form.email(class="from-control form-control-lg")}}
+                </div>
+                <div class="form-group">
+                        {{ form.password.Label(class="from-control-label")}}
+                        {{ form.password(class="from-control form-control-lg")}}
+                </div>
+                <div class="form-group">
+                        {{ form.confirm_password.Label(class="from-control-label")}}
+                        {{ form.confirm_password(class="from-control form-control-lg")}}
+                </div>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already Have An Account ? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+        </small>
+    </div>
+{% endblock content%}

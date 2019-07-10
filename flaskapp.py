@@ -1,6 +1,13 @@
 from flask import Flask , render_template, url_for
+from forms import RegistrationForm, LoginForm
+
 app = Flask(__name__)
 
+#this is a secret key  it protects against modifying cookies
+#and cross site scripting attack
+#ideally secret key should be a random set of characters
+#so secrets module of python is used to generate a random key
+app.config['SECRET_KEY'] = 'a3f14d55ce06de0ad04b2aef1ac782d6'
 
 posts = [
     {
@@ -29,6 +36,15 @@ def home():
 def about():
     return render_template("about.html",title="About")
 
+@app.route("/register")
+def register():
+    form = 'RegistrationForm()' #instance of the form that will be sent to the application
+    return render_template('register.html',title='Register',form=form)
+
+@app.route("/login")
+def login():
+    form = 'LoginForm()' #instance of the login form to be sent to the application
+    return render_template('login.html',title='Login',form=form)
 
 #runs the code
 app.run(debug=True)
