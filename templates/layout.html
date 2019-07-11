@@ -43,6 +43,19 @@
     <main role="main" class="container">
             <div class="row">
                 <div class="col-md-8">
+                    <!-- Here the flash message will be displayed so another code
+                    block added to handle it
+                with_categories is used to accept and handle the second arguement 
+                    passsed be the flash function-->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                            <div class = "alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                {% endwith %}    
                 {% block content %}{% endblock %}
                 </div>
                 <div class="col-md-4">

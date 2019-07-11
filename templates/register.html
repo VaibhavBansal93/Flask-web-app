@@ -10,27 +10,74 @@
                      passing a form-control-label class in it is a bootstrap stuff
                     that shows the form label only -->
                     {{ form.username.label(class="form-control-label")}}
-                    <!-- We also need to display the form data so we again use the 
-                    form.username but this time it will show the form content  
-                    form-control and form-control-lg (for large) (bootsrap classes)-->
-                    {{ form.username(class="form-control form-control-lg")}}
+
+
+                    <!-- Whenever an error is encountered nothing happens.
+                     To display the error to the user bootstrap classes are used
+                     invalid-feedback and is-invalid-->
+                    {% if form.username.errors %}
+                        {{ form.username(class = "form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <!-- Else display the right content -->
+                    {% else %}
+                        <!-- We also need to display the form data so we again use the 
+                        form.username but this time it will show the form content  
+                        form-control and form-control-lg (for large) (bootsrap classes)-->
+                        {{ form.username(class="form-control form-control-lg")}}
+
+                    {% endif %}
+                    
                 </div>
                 <div class="form-group">
-                        {{ form.email.label(class="from-control-label")}}
-                        {{ form.email(class="from-control form-control-lg")}}
+                        {{ form.email.label(class="form-control-label")}}
+                        
+                        {% if form.email.errors %}
+                            {{ form.email(class = "form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control form-control-lg")}}
+                        {% endif %}
                 </div>
                 <div class="form-group">
-                        {{ form.password.label(class="from-control-label")}}
-                        {{ form.password(class="from-control form-control-lg")}}
+                        {{ form.password.label(class="form-control-label")}}
+                        
+                        {% if form.password.errors %}
+                            {{ form.password(class = "form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="form-control form-control-lg")}}
+                        {% endif %}
                 </div>
                 <div class="form-group">
-                        {{ form.confirm_password.label(class="from-control-label")}}
-                        {{ form.confirm_password(class="from-control form-control-lg")}}
+                        {{ form.confirm_password.label(class="form-control-label")}}
+                        
+                        {% if form.confirm_password.errors %}
+                            {{ form.confirm_password(class = "form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.confirm_password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.confirm_password(class="form-control form-control-lg")}}
+                        {% endif %}
                 </div>
+            </fieldset>
                 <div class="form-group">
                     {{ form.submit(class="btn btn-outline-info") }}
                 </div>
-            </fieldset>
         </form>
     </div>
     <div class="border-top pt-3">

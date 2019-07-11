@@ -30,21 +30,36 @@ def home():
     #to pass variables use var1=var
     #var1 is the name that will be used by the html template
     #var is the name used in the python script
-    return render_template("home.html", posts=posts)
+    return render_template("home.html",title="Home", posts=posts)
 
 @app.route("/about")
 def about():
     return render_template("about.html",title="About")
 
-@app.route("/register")
+@app.route("/register", methods = ['GET', 'POST']) 
 def register():
     form = RegistrationForm() #instance of the form that will be sent to the application
+    if form.validate_on_submit(): #what to do submit
+    #we use an f here because we need to pass a variable also to the string
+        flash(f'Account created for { form.username.data }!', 'success') 
+        #a message will be flahed 
+        #different types of alerts should have different types of flash messages for them
+        #flash accepts a second arguement
+        # in the second arguement we pass a bootstrap class success
+        #we also need to update the layout page to show this flash message
+        return redirect(url_for('home'))
     return render_template('register.html',title='Register',form = form)
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-    form = 'LoginForm()' #instance of the login form to be sent to the application
-    return render_template('login.html',title='Login',form = form)
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login Unsuccessful. Please check username and password', 'danger')
+    return render_template('login.html', title='Login', form=form)
 
 #runs the code
 app.run(debug=True)
